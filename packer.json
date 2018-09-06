@@ -32,7 +32,7 @@
     },
     {
       "type": "file",
-      "source": "./bundle",
+      "source": "./bundle/",
       "destination": "/home/ubuntu/deploy"
     },
     {
