@@ -4,18 +4,18 @@ pipeline {
   tools {nodejs "node"}
   
   parameters {
-    string(name: 'name', description: 'Filename that bundles were saved as')
+    string(name: 'NAME', description: 'Filename that bundles were saved as')
   }
  
   stages {
     stage('Packer build script') {
         steps {
            step([  $class: 'CopyArtifact',
-                  filter: '${params.name}.zip',
+                  filter: "${env.NAME}.zip",
                   fingerprintArtifacts: true,
                   projectName: 'nodejs-template'
             ])
-            unzip zipFile: '${params.name}.zip', dir: './bundle'
+            unzip zipFile: "${env.NAME}.zip", dir: './bundle'
             sh 'packer build bundle/.pipeline/packer.json'
         }
     }
