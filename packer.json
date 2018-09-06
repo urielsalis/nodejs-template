@@ -2,7 +2,8 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "node_version": "8.11.4"
+    "node_version": "8.11.4",
+    "name": ""
   },
   "builders": [
     {
@@ -20,7 +21,7 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "node-baas {{timestamp}}"
+      "ami_name": "{{name}}"
     }
   ],
   "provisioners": [
