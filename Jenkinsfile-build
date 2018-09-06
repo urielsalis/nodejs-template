@@ -4,14 +4,14 @@ pipeline {
   tools {nodejs "node"}
  
   parameters {
-    string(name: 'repo', description: 'Repo to clone')
-    string(name: 'name', description: 'Filename to save bundles as')
+    string(name: 'REPO', description: 'Repo to clone')
+    string(name: 'NAME', description: 'Filename to save bundles as')
   }
   
   stages {
     stage('Get sources') {
       steps {
-        git '${params.repo}.git'
+        git '${env.REPO}.git'
         sh 'git clean -fdx'
       }
     }
@@ -31,7 +31,7 @@ pipeline {
     
     stage('Create build artifact') {
       steps {
-        zip zipFile: '${params.name}.zip', archive: true
+        zip zipFile: '${env.NAME}.zip', archive: true
       }
     }
   }
