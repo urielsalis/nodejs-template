@@ -21,7 +21,7 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "{{name}}"
+      "ami_name": "{{user `name`}}"
     }
   ],
   "provisioners": [
