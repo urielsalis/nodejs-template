@@ -23,7 +23,7 @@ pipeline {
                   projectName: 'nodejs-template'
             ])
             unzip zipFile: "${env.NAME}.zip", dir: './bundle'
-            sh 'packer build packer.json'
+            sh "packer build -var 'name=${env.NAME}' packer.json"
         }
     }
   }
