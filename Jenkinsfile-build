@@ -3,10 +3,15 @@ pipeline {
  
   tools {nodejs "node"}
  
+  parameters {
+    string(name: 'repo', description: 'Repo to clone')
+    string(name: 'name', description: 'Filename to save bundles as')
+  }
+  
   stages {
     stage('Get sources') {
       steps {
-        git 'https://github.com/urielsalis/node-baas.git'
+        git '${params.repo}.git'
         sh 'git clean -fdx'
       }
     }
@@ -26,7 +31,7 @@ pipeline {
     
     stage('Create build artifact') {
       steps {
-        zip zipFile: 'bundle.zip', archive: true
+        zip zipFile: '${params.name}.zip', archive: true
       }
     }
   }
