@@ -2,16 +2,20 @@ pipeline {
   agent any
  
   tools {nodejs "node"}
+  
+  parameters {
+    string(name: 'name', description: 'Filename that bundles were saved as')
+  }
  
   stages {
     stage('Packer build script') {
         steps {
            step([  $class: 'CopyArtifact',
-                  filter: 'bundle.zip',
+                  filter: '${params.name}.zip',
                   fingerprintArtifacts: true,
-                  projectName: 'node-baas'
+                  projectName: 'nodejs-template'
             ])
-            unzip zipFile: 'bundle.zip', dir: './bundle'
+            unzip zipFile: '${params.name}.zip', dir: './bundle'
             sh 'packer build bundle/.pipeline/packer.json'
         }
     }
